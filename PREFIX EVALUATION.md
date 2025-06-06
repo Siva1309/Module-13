@@ -1,40 +1,64 @@
-# Exp.No:34  
-## PREFIX EVALUATION
+# Exp.No:33  
+## POSTFIX EVALUATION
 
 ---
 
 ### AIM  
-To write a Python program to evaluate a user-given Prefix expression using a stack. The expression must contain operators such as Multiplication, Addition, and Subtraction.
+To write a Python program to evaluate a user-given Postfix expression that contains Multiplication and Addition operators using the stack concept.
 
 ---
 
 ### ALGORITHM
 
 1. **Start the program.**
-2. Define a set of valid operators: `*, -, +, %, /, **`.
-3. Initialize an empty stack.
-4. Traverse the prefix expression from **right to left**:
-   - If the character is a **digit**, convert it to an integer and push it onto the stack.
-   - If the character is an **operator**, pop two elements from the stack.
-     - Apply the operator on the two popped operands.
-     - Push the result back onto the stack.
-   - If an invalid character is encountered, raise an error.
-5. After traversal, the stack should contain only **one element**.
-6. Return the **single element** as the evaluation result.
-7. **End the program.**
+2. Define a set named `OPERATORS` containing all the valid operators: `*, +, **, -, /, %`.
+3. Define a function `evaluate_postfix(exp)` to evaluate the postfix expression:
+   - Inside the function, create an empty list called `stack` to store operands and intermediate results.
+4. Loop through each item in the given postfix expression:
+   - If the current item is **not in OPERATORS**, it is an operand, so append it to the stack.
+   - If the current item is an **operator**:
+     - Pop the top two elements from the stack (first pop is `a`, second pop is `b`).
+     - Perform the operation `b <operator> a` depending on the current operator.
+     - Store the result in a variable called `result`.
+     - Append the result back to the stack.
+5. After the loop ends, return the first element of the stack as the final evaluation result.
+6. Take a postfix expression as input from the user.
+7. Print the postfix expression.
+8. Call the function `evaluate_postfix()` with the input and print the result.
+9. **End the program.**
 
 ---
 
 ### PROGRAM
 
 ```
+OPERATORS=set(['*','+']) 
 
+def evaluate_postfix(expression):
+    stack=[]
+    for i in expression:
+        if i not in OPERATORS:
+            stack.append(i)
+        else:
+            a=stack.pop()
+            b=stack.pop()
+            if i=='+':
+                res=int(a)+int(b)
+            elif i=='*':
+                res=int(a)*int(b)
+            stack.append(res)
+    return stack[0]
+    
+    
+expression = input()
+print("postfix expression: ",expression)
+print("Evaluation result: ",evaluate_postfix(expression))
 
 ```
 
-
 ### OUTPUT
-
+![Screenshot (255)](https://github.com/user-attachments/assets/43c4013a-f1ba-4a4f-a311-384c74e99da9)
 
 
 ### RESULT
+Thus the python program was initiated and executed successfully.
